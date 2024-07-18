@@ -16,14 +16,21 @@
     "url": "https://github.com/kevscript/vscolors"
   },
   "icon": "icon.png",
-  "keywords": ["vscolors", "color converter", "convert colors", "hex to rgb", "rgb to hex", "hex converter", "rgb converter", "hsl converter", "color parser", "color format", "color type"],
+  "keywords": [
+    "vscolors",
+    "color converter",
+    "convert colors",
+    "hex to rgb",
+    "rgb to hex",
+    "hex converter",
+    "rgb converter",
+    "hsl converter",
+    "color parser",
+    "color format",
+    "color type"
+  ],
   "categories": [
     "Other"
-  ],
-  "activationEvents": [
-    "onCommand:vscolors.color2Hex",
-    "onCommand:vscolors.color2Rgb",
-    "onCommand:vscolors.color2Hsl"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -37,6 +44,10 @@
         "title": "Color to RGB"
       },
       {
+        "command": "vscolors.color2Rgba",
+        "title": "Color to RGBA"
+      },
+      {
         "command": "vscolors.color2Hsl",
         "title": "Color to HSL"
       }
@@ -44,17 +55,22 @@
     "menus": {
       "editor/context": [
         {
-          "when": "editorHasSelection",
+          "when": "editorTextFocus",
           "command": "vscolors.color2Hex",
           "group": "1_modification"
         },
         {
-          "when": "editorHasSelection",
+          "when": "editorTextFocus",
           "command": "vscolors.color2Rgb",
           "group": "1_modification"
         },
         {
-          "when": "editorHasSelection",
+          "when": "editorTextFocus",
+          "command": "vscolors.color2Rgba",
+          "group": "1_modification"
+        },
+        {
+          "when": "editorTextFocus",
           "command": "vscolors.color2Hsl",
           "group": "1_modification"
         }
@@ -66,22 +82,25 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.14",
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.4",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.52.0",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
+    "@types/chai": "^4.3.16",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.11",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "chai": "*",
-    "eslint": "^7.15.0",
-    "glob": "^7.1.6",
+    "eslint": "^9.7.0",
+    "glob": "^11.0.0",
     "mocha": "*",
-    "typescript": "^4.1.2",
+    "typescript": "^5.5.3",
     "vscode-test": "^1.4.1"
+  },
+  "dependencies": {
+    "@typescript-eslint/typescript-estree": "^7.16.1"
   }
 }

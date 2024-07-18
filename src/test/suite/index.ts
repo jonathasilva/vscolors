@@ -1,8 +1,9 @@
 import * as path from 'path';
-import * as Mocha from 'mocha';
-import * as glob from 'glob';
+import Mocha from 'mocha';
+import { glob } from 'glob';
 
-export function run(): Promise<void> {
+export function run(): Promise<void> 
+{
 	// Create the mocha test
 	const mocha = new Mocha({
 		// ui: 'tdd', commented out because we want to use describe/it instead of suite/test methods
@@ -11,28 +12,32 @@ export function run(): Promise<void> {
 
 	const testsRoot = path.resolve(__dirname, '..');
 
-	return new Promise((c, e) => {
-		glob('**/**.test.js', { cwd: testsRoot }, (err, files) => {
-			if (err) {
-				return e(err);
-			}
+	return new Promise(async (c, e) => {
+		const jsFiles = await glob('**/**.test.js', {});
 
-			// Add files to the test suite
-			files.forEach(f => mocha.addFile(path.resolve(testsRoot, f)));
+		// Add files to the test suite
+		jsFiles.forEach(f => mocha.addFile(path.resolve(testsRoot, f)));
 
-			try {
-				// Run the mocha test
-				mocha.run(failures => {
-					if (failures > 0) {
-						e(new Error(`${failures} tests failed.`));
-					} else {
-						c();
-					}
-				});
-			} catch (err) {
-				console.error(err);
-				e(err);
-			}
-		});
+		// Run the mocha test
+		try 
+		{
+			// Run the mocha test
+			mocha.run(failures => 
+			{
+				if (failures > 0) 
+				{
+					e(new Error(`${failures} tests failed.`));
+				} 
+				else
+				{
+					c();
+				}
+			});
+		} 
+		catch (err) 
+		{
+			console.error(err);
+			e(err);
+		}
 	});
 }
