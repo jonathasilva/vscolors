@@ -4,7 +4,7 @@
   "description": "Color Format Converter for VSCode. Supports HEX(A), RGB(A) and HSL(A) formats.",
   "version": "0.0.6",
   "engines": {
-    "vscode": "^1.52.0"
+    "vscode": "^1.91.0"
   },
   "publisher": "kevscript",
   "author": {
@@ -33,6 +33,12 @@
     "Other"
   ],
   "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:vscolors.color2Hex",
+    "onCommand:vscolors.color2Rgb",
+    "onCommand:vscolors.color2Rgba",
+    "onCommand:vscolors.color2Hsl"
+  ],
   "contributes": {
     "commands": [
       {
